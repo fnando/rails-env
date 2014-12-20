@@ -7,7 +7,7 @@ describe RailsEnv do
     Rails.env.on(:test, &block)
   end
 
-  it 'skips block when env matches' do
+  it 'skips block when env differs' do
     block = proc {}
     expect(block).not_to receive(:call)
     Rails.env.on(:production, &block)

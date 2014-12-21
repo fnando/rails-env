@@ -8,8 +8,8 @@ module RailsEnv
   end
 
   module Extension
-    def on(env, &block)
-      block.call(Rails.configuration) if Rails.env.to_s == env.to_s
+    def on(*envs, &block)
+      block.call(Rails.configuration) if envs.include?(Rails.env.to_sym)
     end
   end
 end

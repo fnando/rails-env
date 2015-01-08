@@ -18,4 +18,10 @@ describe RailsEnv do
     expect(block).not_to receive(:call)
     Rails.env.on(:production, &block)
   end
+
+  it 'runs on any environment' do
+    block = proc {}
+    expect(block).to receive(:call).with(Rails.configuration)
+    Rails.env.on(:any, &block)
+  end
 end

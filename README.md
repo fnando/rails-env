@@ -36,6 +36,14 @@ end
 
 Looks dumb, but you don't have to use the long `Rails.configuration` or assign it to a local variable. This is useful when you're extracting out things to initializers.
 
+To match all environments, use `:any`.
+
+```ruby
+Rails.env.on(:any) do |config|
+  # Do something with config
+end
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/fnando/rails-env/fork )

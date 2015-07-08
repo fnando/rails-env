@@ -10,7 +10,7 @@ module RailsEnv
   module Extension
     def on(*envs, &block)
       env_matched = envs.include?(:any) || envs.include?(Rails.env.to_sym)
-      block.call(Rails.configuration) if env_matched
+      Rails.application.configure(&block) if env_matched
     end
   end
 end

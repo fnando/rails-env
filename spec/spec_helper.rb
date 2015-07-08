@@ -1,7 +1,7 @@
 ENV['RAILS_ENV'] = 'test'
 
 require 'bundler/setup'
-require 'rails/all'
+require 'rails'
 require 'rails-env'
 
 class DummyApp < Rails::Application

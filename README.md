@@ -29,8 +29,8 @@ end
 You can just use:
 
 ```ruby
-Rails.env.on(:production) do |config|
-  # Do something with config
+Rails.env.on(:production) do
+  config.assets.version = '1.0'
 end
 ```
 
@@ -39,8 +39,28 @@ Looks dumb, but you don't have to use the long `Rails.configuration` or assign i
 To match all environments, use `:any`.
 
 ```ruby
-Rails.env.on(:any) do |config|
-  # Do something with config
+Rails.env.on(:any) do
+  config.assets.version = '1.0'
+end
+```
+
+## Upgrading from previous versions
+
+Previous versions used to yield the configuration; this is no longer true on 1.0+.
+
+So, instead of using
+
+```ruby
+Rails.env.on(:development) do |config|
+  config.assets.version = '1.0'
+end
+```
+
+use
+
+```ruby
+Rails.env.on(:development) do
+  config.assets.version = '1.0'
 end
 ```
 

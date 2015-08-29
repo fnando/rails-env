@@ -7,20 +7,34 @@ module RailsEnv
     end
   end
 
+  def self.config
+    Rails.configuration
+  end
+
   def self.propagate_configuration!
     propagate(:action_mailer, '::ActionMailer::Base')
     propagate(:active_record, '::ActiveRecord::Base')
     propagate(:active_job, '::ActiveJob::Base')
     propagate(:time_zone, '::Time', :zone)
-    propagate(:i18n, '::I18n')
+    propagate_i18n
+  end
+
+  def self.propagate_i18n
+    I18n.available_locales = (config.i18n.available_locales || [])
+                              .compact
+                              .map(&:to_sym)
+                              .uniq
+    I18n.default_locale = config.i18n.default_locale if config.i18n.default_locale
+    I18n.locale = config.i18n.locale if config.i18n.locale
+    I18n.load_path += config.i18n.load_path if config.i18n.load_path
   end
 
   def self.propagate(options_name, target_name, target_property = nil)
     return unless Object.const_defined?(target_name)
-    return unless Rails.configuration.respond_to?(options_name)
+    return unless config.respond_to?(options_name)
 
     target = Object.const_get(target_name)
-    options = Rails.configuration.public_send(options_name)
+    options = config.public_send(options_name)
 
     if options.kind_of?(Enumerable)
       options.each do |key, value|

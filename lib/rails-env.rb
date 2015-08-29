@@ -15,6 +15,7 @@ module RailsEnv
     propagate(:action_mailer, '::ActionMailer::Base')
     propagate(:active_record, '::ActiveRecord::Base')
     propagate(:active_job, '::ActiveJob::Base')
+    propagate(:action_controller, '::ActionController::Base')
     propagate(:time_zone, '::Time', :zone)
     propagate_i18n
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RailsEnv, '::ActionMailer' do
+describe RailsEnv, 'config propagation' do
   before do
     Rails.env.on(:test) do
       config.action_mailer.default_url_options = {host: 'localhost', port: 3000}

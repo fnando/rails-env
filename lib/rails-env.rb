@@ -1,5 +1,16 @@
 require 'rails-env/version'
 
+module Rails
+  class << self
+    env_method = instance_method(:env=)
+
+    define_method :env= do |env|
+      env_method.bind(self).call(env)
+      Rails.env.extend(RailsEnv::Extension)
+    end
+  end
+end
+
 module RailsEnv
   class Railtie < Rails::Railtie
     initializer 'rails-env' do

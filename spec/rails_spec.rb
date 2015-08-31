@@ -12,6 +12,11 @@ describe RailsEnv, '::ActionMailer' do
     end
   end
 
+  it 'assigns extended environment' do
+    Rails.env = 'test'
+    expect(Rails.env).to respond_to(:on)
+  end
+
   it 'sets url options' do
     expect(ActionMailer::Base.default_url_options).to include(host: 'localhost', port: 3000)
   end

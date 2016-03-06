@@ -44,6 +44,23 @@ Rails.env.on(:any) do
 end
 ```
 
+## Gotcha
+
+Not all options can be defined through `Rails.env`. Rails propagates options on its engine file, meaning that every option defined on `config` afterwards must be manually propagated. 
+
+It's hard to automatically propagate every existing option, so we have the most common options covered, as you can see the list below:
+
+- action_controller
+- action_mailer
+- action_view
+- active_job
+- active_record
+- time_zone
+- auto/eager load paths
+- i18n
+
+If you need to set any option not covered by rails-env, [please open a ticket](https://github.com/fnando/rails-env/issues/new).
+
 ## Upgrading from previous versions
 
 Previous versions used to yield the configuration; this is no longer true on 1.0+.

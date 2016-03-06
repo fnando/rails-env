@@ -1,4 +1,4 @@
-require 'rails-env/version'
+require "rails-env/version"
 
 module Rails
   class << self
@@ -13,7 +13,7 @@ end
 
 module RailsEnv
   class Railtie < Rails::Railtie
-    initializer 'rails-env' do
+    initializer "rails-env" do
       Rails.env.extend(Extension)
     end
   end
@@ -23,11 +23,11 @@ module RailsEnv
   end
 
   def self.propagate_configuration!
-    propagate(:action_mailer, '::ActionMailer::Base')
-    propagate(:active_record, '::ActiveRecord::Base')
-    propagate(:active_job, '::ActiveJob::Base')
-    propagate(:action_controller, '::ActionController::Base')
-    propagate(:time_zone, '::Time', :zone)
+    propagate(:action_mailer, "::ActionMailer::Base")
+    propagate(:active_record, "::ActiveRecord::Base")
+    propagate(:active_job, "::ActiveJob::Base")
+    propagate(:action_controller, "::ActionController::Base")
+    propagate(:time_zone, "::Time", :zone)
     propagate_i18n
   end
 
@@ -48,7 +48,7 @@ module RailsEnv
     target = Object.const_get(target_name)
     options = config.public_send(options_name)
 
-    if options.kind_of?(Enumerable)
+    if options.is_a?(Enumerable)
       options.each do |key, value|
         target.public_send("#{key}=", value) if target.respond_to?("#{key}=")
       end

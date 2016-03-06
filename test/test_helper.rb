@@ -5,6 +5,9 @@ require "rails"
 require "action_mailer/railtie"
 require "rails-env"
 
+require "minitest/utils"
+require "minitest/autorun"
+
 class DummyApp < Rails::Application
   config.eager_load = false
 end

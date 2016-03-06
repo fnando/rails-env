@@ -1,4 +1,4 @@
-require "spec_helper"
+require "test_helper"
 
 class Callable
   attr_accessor :configuration
@@ -12,32 +12,32 @@ class Callable
   end
 end
 
-describe RailsEnv do
-  it "runs block when env matches" do
+class RailsEnvTest < Minitest::Test
+  test "runs block when env matches" do
     block = Callable.new
     Rails.env.on(:test, &block)
 
-    expect(block.configuration).to eq(Rails.configuration)
+    assert_equal Rails.configuration, block.configuration
   end
 
-  it "matches against multiple envs" do
+  test "matches against multiple envs" do
     block = Callable.new
     Rails.env.on(:development, :test, &block)
 
-    expect(block.configuration).to eq(Rails.configuration)
+    assert_equal Rails.configuration, block.configuration
   end
 
-  it "skips block when env differs" do
+  test "skips block when env differs" do
     block = Callable.new
     Rails.env.on(:production, &block)
 
-    expect(block.configuration).to be_nil
+    assert_nil block.configuration
   end
 
-  it "runs on any environment" do
+  test "runs on any environment" do
     block = Callable.new
     Rails.env.on(:any, &block)
 
-    expect(block.configuration).to eq(Rails.configuration)
+    assert_equal Rails.configuration, block.configuration
   end
 end

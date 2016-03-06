@@ -10,6 +10,7 @@ class ConfigPropagationTest < Minitest::Test
       config.i18n.available_locales = ["pt-BR"]
       config.i18n.default_locale = "pt-BR"
       config.action_view.raise_on_missing_translations = true
+      config.active_job.queue_adapter = :test
     end
   end
 
@@ -45,5 +46,9 @@ class ConfigPropagationTest < Minitest::Test
 
   test "sets raise on missing translations" do
     assert ActionView::Base.raise_on_missing_translations
+  end
+
+  test "sets queue adapter" do
+    assert_kind_of ActiveJob::QueueAdapters::TestAdapter, ActiveJob::Base.queue_adapter
   end
 end

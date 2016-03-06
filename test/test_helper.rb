@@ -4,6 +4,7 @@ require "bundler/setup"
 require "rails"
 require "action_mailer/railtie"
 require "action_view/railtie"
+require "active_job/railtie"
 require "rails-env"
 
 require "minitest/utils"

@@ -9,6 +9,7 @@ class ConfigPropagationTest < Minitest::Test
       config.time_zone = "America/Sao_Paulo"
       config.i18n.available_locales = ["pt-BR"]
       config.i18n.default_locale = "pt-BR"
+      config.action_view.raise_on_missing_translations = true
     end
   end
 
@@ -40,5 +41,9 @@ class ConfigPropagationTest < Minitest::Test
 
   test "sets available locales" do
     assert_equal [:"pt-BR"], I18n.available_locales
+  end
+
+  test "sets raise on missing translations" do
+    assert ActionView::Base.raise_on_missing_translations
   end
 end

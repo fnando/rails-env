@@ -29,6 +29,7 @@ module RailsEnv
     propagate(:active_job, "::ActiveJob::Base")
     propagate(:active_record, "::ActiveRecord::Base")
     propagate(:time_zone, "::Time", :zone)
+    propagate_autoload_paths
     propagate_i18n
   end
 
@@ -42,6 +43,17 @@ module RailsEnv
     I18n.load_path += config.i18n.load_path if config.i18n.load_path
   end
 
+  def self.propagate_autoload_paths
+    all_autoload_paths = (
+      config.autoload_paths +
+      config.eager_load_paths +
+      config.autoload_once_paths
+    ).uniq
+
+    ActiveSupport::Dependencies.autoload_paths.unshift(*all_autoload_paths)
+    ActiveSupport::Dependencies.autoload_once_paths.unshift(*config.autoload_once_paths)
+  end
+
   def self.propagate(options_name, target_name, target_property = nil)
     return unless Object.const_defined?(target_name)
     return unless config.respond_to?(options_name)
@@ -49,7 +61,7 @@ module RailsEnv
     target = Object.const_get(target_name)
     options = config.public_send(options_name)
 
-    if options.is_a?(Enumerable)
+    if options.is_a?(Hash)
       options.each do |key, value|
         target.public_send("#{key}=", value) if target.respond_to?("#{key}=")
       end

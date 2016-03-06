@@ -11,6 +11,10 @@ class ConfigPropagationTest < Minitest::Test
       config.i18n.default_locale = "pt-BR"
       config.action_view.raise_on_missing_translations = true
       config.active_job.queue_adapter = :test
+
+      config.autoload_paths += ["#{__dir__}/al"]
+      config.autoload_once_paths += ["#{__dir__}/alo"]
+      config.eager_load_paths += ["#{__dir__}/el"]
     end
   end
 
@@ -50,5 +54,15 @@ class ConfigPropagationTest < Minitest::Test
 
   test "sets queue adapter" do
     assert_kind_of ActiveJob::QueueAdapters::TestAdapter, ActiveJob::Base.queue_adapter
+  end
+
+  test "sets autoload_paths" do
+    assert ActiveSupport::Dependencies.autoload_paths.include?("#{__dir__}/al")
+    assert ActiveSupport::Dependencies.autoload_paths.include?("#{__dir__}/el")
+    assert ActiveSupport::Dependencies.autoload_paths.include?("#{__dir__}/alo")
+  end
+
+  test "sets autoload_once_paths" do
+    assert ActiveSupport::Dependencies.autoload_once_paths.include?("#{__dir__}/alo")
   end
 end

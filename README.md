@@ -1,5 +1,9 @@
 # rails-env
 
+[![Build Status](https://travis-ci.org/fnando/rails-env.svg)](https://travis-ci.org/fnando/rails-env)
+[![Code Climate](https://codeclimate.com/github/fnando/rails-env.png)](https://codeclimate.com/github/fnando/rails-env)
+[![Gem Version](https://badge.fury.io/rb/rails-env.svg)](http://badge.fury.io/rb/rails-env)
+
 Avoid environment detection on Rails.
 
 ## Installation

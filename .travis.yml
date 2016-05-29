@@ -1,9 +1,12 @@
 sudo: false
 cache: bundler
 rvm:
-  - "2.2.4"
-  - "2.3.0"
+- 2.2.4
+- 2.3.1
 script: bundle exec rake
 gemfile:
-  - gemfiles/rails_4_2.gemfile
-  - gemfiles/rails_5_0.gemfile
+- gemfiles/rails_4_2.gemfile
+- gemfiles/rails_5_0.gemfile
+env:
+  global:
+    secure: irnD3t0HmZ2dG0GVHhVtzgitUX7m4GtJ3uK55vGp7JWPHHIL4daQORfHcuu3uJW0OaECf4WQUODy0HM2dArXZ1DrOjm7cnfr03oZKKi7Ft5ECOcQUagvsir7zJ+icBJ8WzcIl7V0p3aHNXEQ9jNIX1/v+Edcs+HXEdlFpp0Vt7Y=

@@ -1,8 +1,10 @@
 # rails-env
 
-[![Build Status](https://travis-ci.org/fnando/rails-env.svg)](https://travis-ci.org/fnando/rails-env)
-[![Code Climate](https://codeclimate.com/github/fnando/rails-env.png)](https://codeclimate.com/github/fnando/rails-env)
-[![Gem Version](https://badge.fury.io/rb/rails-env.svg)](http://badge.fury.io/rb/rails-env)
+[![Travis-CI](https://travis-ci.org/fnando/rails-env.png)](https://travis-ci.org/fnando/rails-env)
+[![Code Climate](https://codeclimate.com/github/fnando/rails-env/badges/gpa.svg)](https://codeclimate.com/github/fnando/rails-env)
+[![Test Coverage](https://codeclimate.com/github/fnando/rails-env/badges/coverage.svg)](https://codeclimate.com/github/fnando/rails-env/coverage)
+[![Gem](https://img.shields.io/gem/v/rails-env.svg)](https://rubygems.org/gems/rails-env)
+[![Gem](https://img.shields.io/gem/dt/rails-env.svg)](https://rubygems.org/gems/rails-env)
 
 Avoid environment detection on Rails.
 

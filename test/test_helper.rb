@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 ENV["RAILS_ENV"] = "test"
 
 require "bundler/setup"
@@ -13,6 +16,7 @@ require "minitest/autorun"
 
 class DummyApp < Rails::Application
   config.eager_load = false
+  config.active_support.test_order = :sorted
 end
 
 Rails.application.initialize!

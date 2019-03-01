@@ -15,10 +15,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.6"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "rails"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "pry-meta"
   spec.add_development_dependency "minitest-utils"
-  spec.add_development_dependency "codeclimate-test-reporter"
+  spec.add_development_dependency "simplecov"
 end

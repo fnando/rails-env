@@ -15,6 +15,8 @@ class ConfigPropagationTest < Minitest::Test
       config.autoload_paths += ["#{__dir__}/al"]
       config.autoload_once_paths += ["#{__dir__}/alo"]
       config.eager_load_paths += ["#{__dir__}/el"]
+
+      config.cache_store = :memory_store
     end
   end
 
@@ -64,5 +66,9 @@ class ConfigPropagationTest < Minitest::Test
 
   test "sets autoload_once_paths" do
     assert ActiveSupport::Dependencies.autoload_once_paths.include?("#{__dir__}/alo")
+  end
+
+  test "sets cache store" do
+    assert_kind_of ActiveSupport::Cache::MemoryStore, Rails.cache
   end
 end

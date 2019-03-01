@@ -31,6 +31,11 @@ module RailsEnv
     propagate(:time_zone, "::Time", :zone)
     propagate_autoload_paths
     propagate_i18n
+    propagate_cache_store
+  end
+
+  def self.propagate_cache_store
+    Rails.cache = ActiveSupport::Cache.lookup_store(config.cache_store)
   end
 
   def self.propagate_i18n

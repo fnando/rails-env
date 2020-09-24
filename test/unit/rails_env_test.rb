@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class Callable
@@ -6,7 +8,7 @@ class Callable
   def to_proc
     callable = self
 
-    lambda do |app|
+    lambda do |_app|
       callable.configuration = config
     end
   end

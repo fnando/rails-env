@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class ConfigPropagationTest < Minitest::Test
@@ -55,7 +57,8 @@ class ConfigPropagationTest < Minitest::Test
   end
 
   test "sets queue adapter" do
-    assert_kind_of ActiveJob::QueueAdapters::TestAdapter, ActiveJob::Base.queue_adapter
+    assert_kind_of ActiveJob::QueueAdapters::TestAdapter,
+                   ActiveJob::Base.queue_adapter
   end
 
   test "sets autoload_paths" do
@@ -65,7 +68,9 @@ class ConfigPropagationTest < Minitest::Test
   end
 
   test "sets autoload_once_paths" do
-    assert ActiveSupport::Dependencies.autoload_once_paths.include?("#{__dir__}/alo")
+    assert ActiveSupport::Dependencies.autoload_once_paths.include?(
+      "#{__dir__}/alo"
+    )
   end
 
   test "sets cache store" do

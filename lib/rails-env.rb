@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails-env/version"
 
 module Rails
@@ -40,10 +42,12 @@ module RailsEnv
 
   def self.propagate_i18n
     I18n.available_locales = (config.i18n.available_locales || [])
-                              .compact
-                              .map(&:to_sym)
-                              .uniq
-    I18n.default_locale = config.i18n.default_locale if config.i18n.default_locale
+                             .compact
+                             .map(&:to_sym)
+                             .uniq
+    if config.i18n.default_locale
+      I18n.default_locale = config.i18n.default_locale
+    end
     I18n.locale = config.i18n.locale if config.i18n.locale
     I18n.load_path += config.i18n.load_path if config.i18n.load_path
   end
@@ -56,7 +60,9 @@ module RailsEnv
     ).uniq
 
     ActiveSupport::Dependencies.autoload_paths.unshift(*all_autoload_paths)
-    ActiveSupport::Dependencies.autoload_once_paths.unshift(*config.autoload_once_paths)
+    ActiveSupport::Dependencies.autoload_once_paths.unshift(
+      *config.autoload_once_paths
+    )
   end
 
   def self.propagate(options_name, target_name, target_property = nil)

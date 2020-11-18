@@ -1,6 +1,6 @@
 # rails-env
 
-[![Travis-CI](https://travis-ci.org/fnando/rails-env.svg)](https://travis-ci.org/fnando/rails-env)
+[![Tests](https://github.com/fnando/rails-env/workflows/ruby-tests/badge.svg)](https://github.com/fnando/rails-env)
 [![Code Climate](https://codeclimate.com/github/fnando/rails-env/badges/gpa.svg)](https://codeclimate.com/github/fnando/rails-env)
 [![Gem](https://img.shields.io/gem/v/rails-env.svg)](https://rubygems.org/gems/rails-env)
 [![Gem](https://img.shields.io/gem/dt/rails-env.svg)](https://rubygems.org/gems/rails-env)
@@ -9,17 +9,15 @@ Avoid environment detection on Rails.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+```bash
+gem install rails-env
+```
 
-    gem 'rails-env'
+Or add the following line to your project's Gemfile:
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rails-env
+```ruby
+gem "rails-env"
+```
 
 ## Usage
 
@@ -58,7 +56,7 @@ its engine file, meaning that every option defined on `config` afterwards must
 be manually propagated.
 
 It's hard to automatically propagate every existing option, so we have the most
-common options covered, as you can see the list below:
+common options covered, as you can see in the list below:
 
 - action_controller
 - action_mailer
@@ -68,6 +66,7 @@ common options covered, as you can see the list below:
 - time_zone
 - auto/eager load paths
 - i18n
+- hosts
 
 If you need to set any option not covered by rails-env,
 [please open a ticket](https://github.com/fnando/rails-env/issues/new).
@@ -93,10 +92,27 @@ Rails.env.on(:development) do
 end
 ```
 
+## Maintainer
+
+- [Nando Vieira](https://github.com/fnando)
+
+## Contributors
+
+- https://github.com/fnando/rails-env/contributors
+
 ## Contributing
 
-1. Fork it ( https://github.com/fnando/rails-env/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+For more details about how to contribute, please read
+https://github.com/fnando/rails-env/blob/main/CONTRIBUTING.md.
+
+## License
+
+The gem is available as open source under the terms of the
+[MIT License](https://opensource.org/licenses/MIT). A copy of the license can be
+found at https://github.com/fnando/rails-env/blob/main/LICENSE.md.
+
+## Code of Conduct
+
+Everyone interacting in the rails-env project's codebases, issue trackers, chat
+rooms and mailing lists is expected to follow the
+[code of conduct](https://github.com/fnando/rails-env/blob/main/CODE_OF_CONDUCT.md).

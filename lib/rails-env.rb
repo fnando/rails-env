@@ -5,6 +5,7 @@ require "rails-env/version"
 module Rails
   class << self
     env_method = instance_method(:env=)
+    remove_method(:env=)
 
     define_method :env= do |env|
       env_method.bind(self).call(env)

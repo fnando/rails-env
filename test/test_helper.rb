@@ -16,6 +16,10 @@ require "rails-env"
 require "minitest/utils"
 require "minitest/autorun"
 
+Dir["#{__dir__}/support/**/*.rb"].sort.each do |file|
+  require file
+end
+
 class DummyApp < Rails::Application
   config.eager_load = false
   config.active_support.test_order = :sorted

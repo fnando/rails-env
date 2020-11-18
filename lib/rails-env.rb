@@ -31,6 +31,7 @@ module RailsEnv
     propagate(:active_job, "::ActiveJob::Base")
     propagate(:active_record, "::ActiveRecord::Base")
     propagate(:time_zone, "::Time", :zone)
+    propagate_hosts
     propagate_autoload_paths
     propagate_i18n
     propagate_cache_store
@@ -38,6 +39,10 @@ module RailsEnv
 
   def self.propagate_cache_store
     Rails.cache = ActiveSupport::Cache.lookup_store(config.cache_store)
+  end
+
+  def self.propagate_hosts
+    Rails.application.config.hosts = config.hosts
   end
 
   def self.propagate_i18n

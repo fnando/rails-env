@@ -13,6 +13,7 @@ class ConfigPropagationTest < Minitest::Test
       config.i18n.default_locale = "pt-BR"
       config.action_view.raise_on_missing_translations = true
       config.active_job.queue_adapter = :test
+      config.hosts = %w[example.com]
 
       config.autoload_paths += ["#{__dir__}/al"]
       config.autoload_once_paths += ["#{__dir__}/alo"]
@@ -75,5 +76,9 @@ class ConfigPropagationTest < Minitest::Test
 
   test "sets cache store" do
     assert_kind_of ActiveSupport::Cache::MemoryStore, Rails.cache
+  end
+
+  test "sets hosts" do
+    assert_equal %w[example.com], Rails.application.config.hosts
   end
 end

@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles(matrix.gemfile) }}
 
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: actions/setup-ruby@v1.1.3
         with:
           ruby-version: ${{ matrix.ruby }}
 

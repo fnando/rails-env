@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.version = RailsEnv::VERSION
   spec.authors = ["Nando Vieira"]
   spec.email   = ["me@fnando.com"]
+  spec.metadata = {"rubygems_mfa_required" => "true"}
 
   spec.summary     = "Avoid environment detection on Rails"
   spec.description = spec.summary

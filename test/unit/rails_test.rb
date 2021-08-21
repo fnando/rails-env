@@ -11,7 +11,13 @@ class ConfigPropagationTest < Minitest::Test
       config.time_zone = "America/Sao_Paulo"
       config.i18n.available_locales = ["pt-BR"]
       config.i18n.default_locale = "pt-BR"
-      config.action_view.raise_on_missing_translations = true
+
+      if config.i18n.respond_to?(:raise_on_missing_translations)
+        config.i18n.raise_on_missing_translations = true
+      else
+        config.action_view.raise_on_missing_translations = true
+      end
+
       config.active_job.queue_adapter = :test
       config.hosts = %w[example.com]
 

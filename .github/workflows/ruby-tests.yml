@@ -1,3 +1,4 @@
+---
 name: ruby-tests
 
 on:
@@ -18,9 +19,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [2.6.x, 2.7.x]
+        ruby: [2.6.x, 2.7.x, 3.0.x]
         gemfile:
           - Gemfile
+          - gemfiles/rails_7_0.gemfile
 
     steps:
       - uses: actions/checkout@v2.3.4
@@ -29,9 +31,11 @@ jobs:
         with:
           path: vendor/bundle
           key: >
-            ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles(matrix.gemfile) }}
+            ${{ runner.os }}-${{ matrix.ruby }}-gems-${{
+            hashFiles(matrix.gemfile) }}
           restore-keys: >
-            ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles(matrix.gemfile) }}
+            ${{ runner.os }}-${{ matrix.ruby }}-gems-${{
+            hashFiles(matrix.gemfile) }}
 
       - name: Set up Ruby
         uses: actions/setup-ruby@v1.1.3

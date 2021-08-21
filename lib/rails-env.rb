@@ -51,9 +51,16 @@ module RailsEnv
                              .compact
                              .map(&:to_sym)
                              .uniq
+
     if config.i18n.default_locale
       I18n.default_locale = config.i18n.default_locale
     end
+
+    if config.i18n.respond_to?(:raise_on_missing_translations)
+      ActionView::Base.raise_on_missing_translations =
+        config.i18n.raise_on_missing_translations
+    end
+
     I18n.locale = config.i18n.locale if config.i18n.locale
     I18n.load_path += config.i18n.load_path if config.i18n.load_path
   end
@@ -62,13 +69,17 @@ module RailsEnv
     all_autoload_paths = (
       config.autoload_paths +
       config.eager_load_paths +
-      config.autoload_once_paths
-    ).uniq
+      config.autoload_once_paths +
+      ActiveSupport::Dependencies.autoload_paths
+    ).uniq.freeze
 
-    ActiveSupport::Dependencies.autoload_paths.unshift(*all_autoload_paths)
-    ActiveSupport::Dependencies.autoload_once_paths.unshift(
-      *config.autoload_once_paths
-    )
+    all_autoload_once_paths = (
+      config.autoload_once_paths +
+      ActiveSupport::Dependencies.autoload_once_paths
+    ).uniq.freeze
+
+    ActiveSupport::Dependencies.autoload_paths = all_autoload_paths
+    ActiveSupport::Dependencies.autoload_once_paths = all_autoload_once_paths
   end
 
   def self.propagate(options_name, target_name, target_property = nil)

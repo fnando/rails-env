@@ -11,6 +11,7 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
-## Unreleased
+## v2.0.0 - 2021-12-06
 
-- Initial release.
+- [Fixed] Fix Rails 7 issues.
+- [Changed] Drop support for Ruby 2.6 and older.

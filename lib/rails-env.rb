@@ -8,7 +8,7 @@ module Rails
     remove_method(:env=)
 
     define_method :env= do |env|
-      env_method.bind(self).call(env)
+      env_method.bind_call(self, env)
       Rails.env.extend(RailsEnv::Extension)
     end
   end

@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary     = "Avoid environment detection on Rails"
   spec.description = spec.summary
   spec.license     = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
 
   github_url = "https://github.com/fnando/rails_env"
   github_tree_url = "#{github_url}/tree/v#{spec.version}"

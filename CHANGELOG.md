@@ -11,7 +11,7 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
-## Unreleased
+## v2.0.1 - 2021-12-11
 
 - [Fixed] Rails 7 was raising an exception because 
   `ActionView::Base.raise_on_missing_translations` is not a thing anymore.

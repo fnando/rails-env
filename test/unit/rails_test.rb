@@ -59,8 +59,10 @@ class ConfigPropagationTest < Minitest::Test
     assert_equal [:"pt-BR"], I18n.available_locales
   end
 
-  test "sets raise on missing translations" do
-    assert ActionView::Base.raise_on_missing_translations
+  RailsEnv.with_rails_constraint("< 7.0.0") do
+    test "sets raise on missing translations" do
+      assert ActionView::Base.raise_on_missing_translations
+    end
   end
 
   test "sets queue adapter" do

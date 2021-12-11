@@ -56,9 +56,11 @@ module RailsEnv
       I18n.default_locale = config.i18n.default_locale
     end
 
-    if config.i18n.respond_to?(:raise_on_missing_translations)
-      ActionView::Base.raise_on_missing_translations =
-        config.i18n.raise_on_missing_translations
+    with_rails_constraint("< 7.0.0") do
+      if config.i18n.respond_to?(:raise_on_missing_translations)
+        ActionView::Base.raise_on_missing_translations =
+          config.i18n.raise_on_missing_translations
+      end
     end
 
     I18n.locale = config.i18n.locale if config.i18n.locale
@@ -96,6 +98,12 @@ module RailsEnv
     else
       target.public_send("#{target_property}=", options)
     end
+  end
+
+  def self.with_rails_constraint(constraint)
+    Gem::Requirement
+      .create(constraint)
+      .satisfied_by?(Gem::Version.create(Rails::VERSION::STRING))
   end
 
   module Extension

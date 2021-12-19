@@ -15,6 +15,10 @@ module Rails
 end
 
 module RailsEnv
+  def self.deprecations
+    @deprecations ||= []
+  end
+
   class Railtie < Rails::Railtie
     initializer "rails-env" do
       Rails.env.extend(Extension)
@@ -30,7 +34,15 @@ module RailsEnv
     propagate(:action_mailer, "::ActionMailer::Base")
     propagate(:action_view, "::ActionView::Base")
     propagate(:active_job, "::ActiveJob::Base")
-    propagate(:active_record, "::ActiveRecord::Base")
+
+    with_rails_constraint("< 7.0.0") do
+      propagate(:active_record, "::ActiveRecord::Base")
+    end
+
+    with_rails_constraint(">= 7.0.0") do
+      propagate(:active_record, "::ActiveRecord")
+    end
+
     propagate(:time_zone, "::Time", :zone)
     propagate_hosts
     propagate_autoload_paths
@@ -101,9 +113,9 @@ module RailsEnv
   end
 
   def self.with_rails_constraint(constraint)
-    Gem::Requirement
-      .create(constraint)
-      .satisfied_by?(Gem::Version.create(Rails::VERSION::STRING))
+    yield if Gem::Requirement
+             .create(constraint)
+             .satisfied_by?(Gem::Version.create(Rails::VERSION::STRING))
   end
 
   module Extension

@@ -59,9 +59,31 @@ class ConfigPropagationTest < Minitest::Test
     assert_equal [:"pt-BR"], I18n.available_locales
   end
 
-  RailsEnv.with_rails_constraint("< 7.0.0") do
+  RailsEnv.with_rails_constraint([">= 6.1.0", "< 7.0.0"]) do
     test "sets raise on missing translations" do
       assert ActionView::Base.raise_on_missing_translations
+    end
+
+    test "sets active record option" do
+      Rails.env.on(:test) do
+        config.active_record.dump_schema_after_migration = false
+        config.active_record.legacy_connection_handling = false
+      end
+
+      refute ActiveRecord::Base.dump_schema_after_migration
+      refute ActiveRecord::Base.legacy_connection_handling
+    end
+  end
+
+  RailsEnv.with_rails_constraint(">= 7.0.0") do
+    test "sets active record option" do
+      Rails.env.on(:test) do
+        config.active_record.dump_schema_after_migration = false
+        config.active_record.legacy_connection_handling = false
+      end
+
+      refute ActiveRecord.dump_schema_after_migration
+      refute ActiveRecord.legacy_connection_handling
     end
   end
 

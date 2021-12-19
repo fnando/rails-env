@@ -4,9 +4,11 @@ require "simplecov"
 SimpleCov.start
 
 ENV["RAILS_ENV"] = "test"
+ENV["DATABASE_URL"] = "sqlite3::memory:"
 
 require "bundler/setup"
 require "rails"
+require "active_record/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_controller/railtie"
